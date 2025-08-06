@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Calculator</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        input { margin-bottom: 10px; padding: 8px; width: 100%; }
+        button { padding: 10px; width: 100%; background-color: #4CAF50; color: white; border: none; }
+        h2 { margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <h1>Invoice Calculator</h1>
+    <label for="listPrice">List Price:</label>
+    <input type="number" id="listPrice" placeholder="Enter list price">
+    <label for="taxRate">Tax Rate (e.g., 0.1):</label>
+    <input type="number" step="0.01" id="taxRate" placeholder="Enter tax rate">
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" placeholder="Enter quantity">
+    <label for="offerQuantity">Offer Quantity:</label>
+    <input type="number" id="offerQuantity" placeholder="Enter offer quantity">
+
+    <button onclick="calculatePrice()">Calculate</button>
+
+    <h2>Final Price: <span id="finalPrice">0.00</span></h2>
+
+    <script>
+        function calculatePrice() {
+            var listPrice = parseFloat(document.getElementById('listPrice').value);
+            var taxRate = parseFloat(document.getElementById('taxRate').value);
+            var quantity = parseInt(document.getElementById('quantity').value);
+            var offerQuantity = parseInt(document.getElementById('offerQuantity').value);
+
+            if (!isNaN(listPrice) && !isNaN(taxRate) && !isNaN(quantity) && !isNaN(offerQuantity)) {
+                var finalPrice = (listPrice * (1 + taxRate) * quantity) / (quantity + offerQuantity);
+                document.getElementById('finalPrice').innerText = finalPrice.toFixed(2);
+            } else {
+                document.getElementById('finalPrice').innerText = "Invalid Input";
+            }
+        }
+    </script>
+
+</body>
+</html>
